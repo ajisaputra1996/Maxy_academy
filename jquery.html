@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <style>
+            #tombol {
+                background-color: aqua;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="contoh" info="nilai">data contoh <span>Test span </span> id</div>
+        <div class="kelas">data contoh kelas</div>
+        <div id="tombol">Tombol</div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script>
+            $(()=>{
+            console.log($("#contoh").text());
+            console.log($("#contoh").html());
+            console.log($(".kelas").text());
+            console.log($(".kelas").html());
+            $("#tombol").clik(()=>{
+                alert("Tombol ditekan");
+                $("#tombol").hide(1000,()=>{
+                    alert("Tombol telah disembunyikan");
+                })
+            })
+            $("#contoh").attr("hello","Maxy");
+            console.log($("#contoh").attr("info"));
+            $("#contoh").removeAttr("info","");
+            $("#tombol").html("Tekan Tombol ini");
+            document.cookie="Test cookie";
+            console.log(document.cookie);
+            });
+        </script>
+    </body>
+</html>
