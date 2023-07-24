@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <style>
+            #tombol{
+                background-color: aqua;
+                max-width: 100px;
+            }
+        </style>    
+    </head>
+    <body>
+        <div id="isi">Masih belum ada data</div>
+        <div id="tombol">Tombol</div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>"
+        <script>
+            $(()=>{
+                $("#tombol").on("click",getData);
+            });
+            function getData(){
+                $.get("https://www.7timer.info/bin/astro.php?lon=113.2&lat=23.1&ac=0&unit=metric&output=json&tzshift=0",function(data,status){
+                    var jsondata = JSON.parse(data);
+                    var result = "";
+                    for(var seri in jsondata.dataseries){
+                        result+="Timepoin "+seri+" : "+jsondata.dataseries[seri].timepoint+"<br/>"
+                    }
+                    $("#isi").html(result);
+                })
+            }
+        </script>
+    </body>
+</html>

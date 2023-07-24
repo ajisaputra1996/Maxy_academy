@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <style>
+      #tombol {
+        background-color: aqua;
+        max-width: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="to">To :</div>
+    <div id="from">From :</div>
+    <div id="heading">Heading :</div>
+    <div id="body">Body :</div>
+    <div id="tombol">Tombol</div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+      integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script>
+      $(()=>{
+          $("#tombol").on("click",getData);
+      });
+      function getData(){
+          $.ajax({
+              url:"http://localhost/Maxy/contoh.xml",
+              dataType:"xml"
+              success:(data)=>{
+                  $(data).find("note").each(function(){
+                      var to = $(this).find("to").text()
+                      var form = $(this).find("form").text()
+                      var heading = $(this).find("heading").text()
+                      var body = $(this).find("body").text()
+                      $("#to").text("To : "+to)
+                      $("#from").text("From : "+from)
+                      $("#heading").text("Heading : "+heading)
+                      $("#body").text("Body : "+body)
+                  })
+              }
+          })
+      }
+    </script>
+  </body>
+</html>

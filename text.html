@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <style>
+            #tombol{
+                background-color: aqua;
+                max-width: 100px;
+            }
+        </style>    
+    </head>
+    <body>
+        <div id="isi">Masih belum ada data</div>
+        <div id="tombol">Tombol</div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>"
+        <script>
+            $(()=>{
+                $("#tombol").on("click",getData);
+            });
+            function getData(){
+                $.get("http://localhost/Maxy/text.txt",function(data,status){
+                    $("#isi").text(data);
+                })
+            }
+        </script>
+    </body>
+</html>

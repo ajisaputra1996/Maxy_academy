@@ -1,0 +1,97 @@
+<html>
+  <head>
+    <style>
+      .tombol {
+        background-color: aqua;
+        max-width: 100px;
+        display: inline;
+        margin:10px;
+        padding: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="isi"></div>
+    <div class="tombol" id="add">Add</div>
+    <div class="tombol" id="path">Path</div>
+    <div class="tombol" id="update">Update</div>
+    <div class="tombol" id="delete">Delete</div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+      integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    "
+    <script>
+      $(() => {
+        getData();
+        $("#add").on("click",addData);
+        $("#path").on("click",patchData);
+        $("#update").on("click",updateData);
+        $("#delete").on("click",deleteData);
+      });
+      function getData() {
+        $.get("http://localhost:3000/posts",(data)=>{
+          var text="<ul>"
+          for(x in data){
+            var judul = data[x]["title"];
+            var author = data[x]["author"];
+            text+="<li>Title : "+judul+"<br/>author : "+author+"</li>"
+          }
+          text+="</ul";
+          $("#list-data").html(text);
+        });
+      }
+      function addData(){
+        var data = {
+          "title":"Judul",
+          "author":"penulis"
+        }
+        $.post("http://localhost:3000/posts",data,(res)=>{
+          alert("Data Berhasil ditambah");
+          getData();
+        })
+      }
+      function patchData(){
+        var id=2;
+        var link="http://localhost:3000/posts/"+id;
+        var isiData = {"title":"Ganti Judul Patch"};
+        $.ajax({
+          url:link,
+          type:"PATCH",
+          data:isiData,
+          success:(res)=>{
+            alert("Data berhasil di update");
+            getData();
+          }
+        })
+      }
+      function updaeData(){
+        var id=2;
+        var link="http://localhost:3000/posts/"+id;
+        var isiData = {"title":"Ganti Judul Patch"};
+        $.ajax({
+          type:"PUT",
+          data:isiData,
+          success:(res)=>{
+            alert("Data berhasil di update");
+            getData();
+          } 
+      })
+      }
+      function deleteData()
+      var id=2;
+        var link="http://localhost:3000/posts/"+id;
+        $.ajax({
+          url:link
+          type:"DELETE",
+          success:(data)=>{
+            alert("Data berhasil di hapus");
+            getData();
+          }
+        }
+        )
+    </script>
+  </body>
+</html>
